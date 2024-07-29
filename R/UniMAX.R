@@ -37,7 +37,7 @@ UniMAX <- function(sample_data, significance_level){
   }
   sort_D_star_max <- sort(D_star_max)
   quantile_value <- quantile(sort_D_star_max, probs = 1 - significance_level)
-  UniMAX <- max(c(
+  UMAX <- max(c(
     sapply(2:ceiling(num_datasets / 2), function(i) {
       (mean(sample_data[[i]]) - mean(sample_data[[i - 1]])) /
         sqrt(
@@ -53,12 +53,12 @@ UniMAX <- function(sample_data, significance_level){
         )
     })
   ))
-  if (UniMAX > quantile_value) {
+  if (UMAX > quantile_value) {
     result <- "Reject null hypothesis"
   } else {
     result <- "Do not reject null hypothesis"
   }
-  return(paste("Critical value:", quantile_value, "; UniMAX Test statistic:", UniMAX, "; Result:", result))
+  return(paste("Critical value:", quantile_value, "; UniMAX Test statistic:", UMAX, "; Result:", result))
 }
 
 
