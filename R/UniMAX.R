@@ -2,10 +2,11 @@
 #' @export
 #' @param sample_data list
 #' @param significance_level numeric
+#' @param h numeric
 #' @return Critical value numeric
 #' @return Test statistic value numeric
 #' @return Result Character
-#' @details Testing of H_0:mu_1 = mu_2 = ... = mu_k vs H_1:mu_1 <=.....<= mu_(h-1)<= mu_h >= mu_(h+1)>=....>= mu_k (at least one strict inequality), where mu_i represents the population means of the i-th treatment. The input consists of two variables: sample_data and significance_level. The output consists of the critical value, the UniMAX test statistic value, and the result, which indicates whether to reject or not reject the null hypothesis.
+#' @details Testing of H_0:mu_1 = mu_2 = ... = mu_k vs H_1:mu_1 <=.....<= mu_(h-1)<= mu_h >= mu_(h+1)>=....>= mu_k (at least one strict inequality), where mu_i represents the population means of the i-th treatment. The input consists of three variables: sample_data, significance_level, and peak = h. The output consists of the critical value, the UniMAX test statistic value, and the result, which indicates whether to reject or not reject the null hypothesis.
 #' @import stats
 #' @author Subha Halder
 UniMAX <- function(sample_data, significance_level, h){
@@ -60,6 +61,7 @@ UniMAX <- function(sample_data, significance_level, h){
   }
   return(paste("Critical value:", quantile_value, "; UniMAX Test statistic:", UMAX, "; Result:", result))
 }
+
 
 
 
