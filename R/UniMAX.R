@@ -10,10 +10,16 @@
 #' @import stats
 #' @author Subha Halder
 UniMAX <- function(sample_data, significance_level, h){
-  set.seed(456)
+  # basic checks & cleanup
   sample_data <- lapply(sample_data, function(x) x[!is.na(x)])
-  num_samples = 100000
   num_datasets <- length(sample_data)
+  if (num_datasets < 3) stop("Need at least 3 groups (length(sample_data) >= 3).")
+  if (!is.numeric(h) || h != as.integer(h)) stop("'peak' must be an integer.")
+  if (h <= 1 || h >= num_datasets) {
+    stop(paste("Error: 'peak' must be greater than 1 and less than", num_datasets, "."))
+  }
+  set.seed(456)
+  num_samples = 100000
   n <- sapply(sample_data, length)
   D_star_max <- numeric(num_samples)
   for (i in 1:num_samples) {
@@ -61,6 +67,7 @@ UniMAX <- function(sample_data, significance_level, h){
   }
   return(paste("Critical value:", quantile_value, "; UniMAX Test statistic:", UMAX, "; Result:", result))
 }
+
 
 
 
